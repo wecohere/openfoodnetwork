@@ -9,7 +9,7 @@ Spree::Classification.class_eval do
 
   def refresh_products_cache
     product = Spree::Product.with_deleted.find(product_id) unless product.present?  
-    product.refresh_products_cache
+    OpenFoodNetwork::ProductsCache.product_changed(product)
   end
 
   def dont_destroy_if_primary_taxon

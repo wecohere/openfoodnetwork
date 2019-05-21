@@ -106,7 +106,7 @@ Spree::Variant.class_eval do
 
   def refresh_products_cache
     if is_master?
-      product.refresh_products_cache
+      OpenFoodNetwork::ProductsCache.product_changed(product)
     else
       OpenFoodNetwork::ProductsCache.variant_changed self
     end
@@ -122,7 +122,7 @@ Spree::Variant.class_eval do
     if is_master?
       exchange_variants(:reload).destroy_all
       yield
-      product.refresh_products_cache
+      OpenFoodNetwork::ProductsCache.product_changed(product)
 
     else
       OpenFoodNetwork::ProductsCache.variant_destroyed(self) do

@@ -38,7 +38,6 @@ Spree::Product.class_eval do
   after_save :remove_previous_primary_taxon_from_taxons
   after_save :ensure_standard_variant
   after_save :update_units
-  after_save :refresh_products_cache
 
 
   # -- Joins
@@ -185,12 +184,6 @@ Spree::Product.class_eval do
     end
   end
   alias_method_chain :destroy, :delete_from_order_cycles
-
-
-  def refresh_products_cache
-    OpenFoodNetwork::ProductsCache.product_changed self
-  end
-
 
   private
 

@@ -13,7 +13,7 @@ module Spree
         variant.option_values << option_value
       end
 
-      it "refreshes the products cache on change, via product" do
+      xit "refreshes the products cache on change, via product" do
         expect(OpenFoodNetwork::ProductsCache).to receive(:product_changed).with(product)
         option_type.name = 'foo'
         option_type.save!

@@ -5,9 +5,6 @@ Spree::Taxon.class_eval do
   self.attachment_definitions[:icon][:path] = 'public/images/spree/taxons/:id/:style/:basename.:extension'
   self.attachment_definitions[:icon][:url] = '/images/spree/taxons/:id/:style/:basename.:extension'
 
-  after_save :refresh_products_cache
-
-
   # Indicate which filters should be used for this taxon
   def applicable_filters
     fs = []
@@ -51,12 +48,5 @@ Spree::Taxon.class_eval do
       ts[t.enterprise_id.to_i] << t.id
       ts
     end
-  end
-
-
-  private
-
-  def refresh_products_cache
-    products(:reload).each(&:refresh_products_cache)
   end
 end
