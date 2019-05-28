@@ -154,12 +154,6 @@ module Spree
     describe "callbacks" do
       let(:product) { create(:simple_product) }
 
-      xit "refreshes the products cache on save" do
-        expect(OpenFoodNetwork::ProductsCache).to receive(:product_changed).with(product)
-        product.name = 'asdf'
-        product.save
-      end
-
       it "refreshes the products cache on delete" do
         expect(OpenFoodNetwork::ProductsCache).to receive(:product_deleted).with(product)
         product.destroy
