@@ -127,7 +127,8 @@ module Openfoodnetwork
       :product_observer,
       :property_observer,
       :product_property_observer,
-      :taxon_observer
+      :taxon_observer,
+      :option_type_observer
     ]
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
