@@ -1,4 +1,5 @@
 class TaxonObserver < ActiveRecord::Observer
+  observe Spree::Taxon
 
   def after_save(taxon)
     taxon.products(:reload).each do |product|
