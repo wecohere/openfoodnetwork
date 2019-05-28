@@ -1,4 +1,6 @@
 class ProductPropertyObserver < ActiveRecord::Observer
+  observe Spree::ProductProperty
+
   def after_save(product_property)
     OpenFoodNetwork::ProductsCache.product_changed(product_property.product)
   end
