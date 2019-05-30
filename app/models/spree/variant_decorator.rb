@@ -30,7 +30,6 @@ Spree::Variant.class_eval do
 
   before_validation :update_weight_from_unit_value, if: -> v { v.product.present? }
   after_save :update_units
-  after_save :refresh_products_cache
   around_destroy :destruction
 
   scope :with_order_cycles_inner, joins(exchanges: :order_cycle)
@@ -102,14 +101,6 @@ Spree::Variant.class_eval do
 
   def fees_by_type_for(distributor, order_cycle)
     OpenFoodNetwork::EnterpriseFeeCalculator.new(distributor, order_cycle).fees_by_type_for self
-  end
-
-  def refresh_products_cache
-    if is_master?
-      OpenFoodNetwork::ProductsCache.product_changed(product)
-    else
-      OpenFoodNetwork::ProductsCache.variant_changed self
-    end
   end
 
   private
