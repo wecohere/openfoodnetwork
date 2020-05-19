@@ -137,7 +137,7 @@ module InjectionHelper
   end
 
   def inject_json_ams(name, data, serializer, opts = {})
-    if data.is_a?(Array) || data.class.to_s.end_with?("ActiveRecord_Relation")
+    if data.is_a?(Array) || data.class.to_s.end_with?("ActiveRecord_Relation") || data.class.to_s.end_with?("ActiveRecord_AssociationRelation")
       opts = { each_serializer: serializer }.merge(opts)
       serializer = ActiveModel::ArraySerializer
     end
