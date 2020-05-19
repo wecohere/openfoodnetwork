@@ -11,7 +11,7 @@ module Spree
       end
 
       def total_on_hand
-        stock_items.sum(&:count_on_hand)
+        stock_items.sum(:count_on_hand)
       end
 
       def backorderable?

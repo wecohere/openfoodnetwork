@@ -99,20 +99,20 @@ module OpenFoodNetwork
         [proc { |lis| lis.first.order.bill_address.firstname + " " + lis.first.order.bill_address.lastname },
          proc { |lis| lis.first.product.name },
          proc { |lis| lis.first.full_name },
-         proc { |lis| lis.sum(&:quantity) }]
+         proc { |lis| lis.sum(:quantity) }]
       when "bulk_coop_customer_payments"
         [proc { |lis| lis.first.order.bill_address.firstname + " " + lis.first.order.bill_address.lastname },
          proc { |lis| lis.first.order.completed_at.to_s },
-         proc { |lis| lis.map(&:order).uniq.sum(&:total) },
+         proc { |lis| lis.map(&:order).uniq.sum(:total) },
          proc { |lis| lis.map(&:order).uniq.sum(&:outstanding_balance) },
-         proc { |lis| lis.map(&:order).uniq.sum(&:payment_total) }]
+         proc { |lis| lis.map(&:order).uniq.sum(:payment_total) }]
       else
         [proc { |lis| lis.first.product.supplier.name },
          proc { |lis| lis.first.product.name },
          proc { |lis| lis.first.product.group_buy_unit_size || 0.0 },
          proc { |lis| lis.first.full_name },
          proc { |lis| lis.first.weight_from_unit_value || 0 },
-         proc { |lis| lis.sum(&:quantity) },
+         proc { |lis| lis.sum(:quantity) },
          proc { |lis| lis.sum { |li| li.max_quantity || 0 } },
          proc { |_lis| "" },
          proc { |_lis| "" }]

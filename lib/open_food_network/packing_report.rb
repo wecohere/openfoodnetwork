@@ -60,7 +60,7 @@ module OpenFoodNetwork
                               proc { |_line_items| "" },
                               proc { |_line_items| I18n.t('admin.reports.total_items') },
                               proc { |_line_items| "" },
-                              proc { |line_items| line_items.sum(&:quantity) },
+                              proc { |line_items| line_items.sum(:quantity) },
                               proc { |_line_items| "" }] },
           { group_by: proc { |line_item| line_item.product.supplier },
             sort_by: proc { |supplier| supplier.name } },
@@ -81,7 +81,7 @@ module OpenFoodNetwork
                              proc { |_line_items| "" },
                              proc { |_line_items| I18n.t('admin.reports.total_items') },
                              proc { |_line_items| "" },
-                             proc { |line_items| line_items.sum(&:quantity) },
+                             proc { |line_items| line_items.sum(:quantity) },
                              proc { |_line_items| "" }] },
          { group_by: proc { |line_item| line_item.product },
            sort_by: proc { |product| product.name } },
@@ -101,7 +101,7 @@ module OpenFoodNetwork
          proc { |line_items| line_items.first.product.supplier.name },
          proc { |line_items| line_items.first.product.name },
          proc { |line_items| line_items.first.full_name },
-         proc { |line_items| line_items.sum(&:quantity) },
+         proc { |line_items| line_items.sum(:quantity) },
          proc { |line_items| is_temperature_controlled?(line_items.first) }]
       else
         [
@@ -112,7 +112,7 @@ module OpenFoodNetwork
           proc { |line_items| line_items.first.order.bill_address.lastname },
           proc { |line_items| line_items.first.product.name },
           proc { |line_items| line_items.first.full_name },
-          proc { |line_items| line_items.sum(&:quantity) },
+          proc { |line_items| line_items.sum(:quantity) },
           proc { |line_items| is_temperature_controlled?(line_items.first) }
         ]
       end
